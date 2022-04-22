@@ -8,7 +8,7 @@
 
 	<?php
 
-		require_once("../model/ManejoObjetos.php");
+		require_once("model/ManejoObjetos.php");
 
 		try {
 
@@ -34,7 +34,7 @@
 					echo $elemento->getComentario() . "</div>";
 
 					if($elemento->getImagen() != ""){
-						echo "<img src='../Assets/images/";
+						echo "<img src='Assets/images/";
 						echo $elemento->getImagen() . "' width='300px' height='200px'/>";
 					}
 
@@ -51,6 +51,8 @@
 	?>
 
 	<br>
-	<a href="Formulario.php">Volver al formulario de carga</a>
+	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+		<a href="#"><input type='submit' name='go_form' id='' value='Volver al formulario de carga'></a>
+	</form>
 </body>
 </html>

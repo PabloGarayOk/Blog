@@ -9,7 +9,7 @@
 <body>
 
   <h2>Nueva entrada</h2>
-  <form action="../controller/transacciones.php" method="post" enctype="multipart/form-data" name="form1">
+  <form action="controller/transacciones.php" method="post" enctype="multipart/form-data" name="form1">
     <table >
       <tr>
         <td>
@@ -42,7 +42,7 @@
         </td>
       </tr>
       <tr>
-        <td colspan="2" align="center"><a href="MostrarBlog.php">Página de visualización del blog</a></td>
+        <td colspan="2" align="center"><a href="index.php">Página de visualización del blog</a></td>
       </tr>
     </table>
   </form>
