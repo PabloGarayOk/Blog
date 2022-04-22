@@ -1,0 +1,46 @@
+* {
+	margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+:root {
+  --theme-color: #F2F0F0;
+  --theme-secundary: #9FA5DE;
+  --theme-secundary-plus: #7B81BE;
+  --text-color:  #ffffff;
+  --text-color-inverse: black;
+  --menu-mobile-background-color: #3A4460;
+
+}
+
+body {
+  font-family: 'Montserrat', sans-serif;
+  background-color: var(--theme-color);
+  color: var(--text-color-inverse);
+  padding-top: 50px;
+}
+
+main {
+	display: flex;
+}
+
+h1 {
+	font-size: 2.6em;
+}
+
+h2 {
+	font-size: 1.6em;
+}
+
+h3 {
+	font-size: 1.4em;
+} 
+
+h4 {
+	font-size: 1.3em;
+}
+
+h5 {
+	font-size: 1.2em;
+}

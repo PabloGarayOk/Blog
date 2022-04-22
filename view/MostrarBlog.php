@@ -2,57 +2,95 @@
 <html>
 <head>
 	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="Assets/css/main.css" />
+	<link rel="stylesheet" type="text/css" href="Assets/css/blog.css" />
+	<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet"/>
 	<title>Mostrar Blog</title>
 </head>
 <body>
+	<div class="main">
+		
+		<section class="blogs">
 
-	<?php
+			<h1 class="blog__principal-title">MINI BLOG</h1>
 
-		require_once("model/ManejoObjetos.php");
+			<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
+				<a class="bot__goform" href="#"><input type='submit' name='go_form' id='' value="Ir al formulario de carga"></a>
+			</form>	
 
-		try {
+			<?php
 
-			$conexion = new PDO('mysql:host=localhost; dbname=ddbb_blog', 'root', '');
-			$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+				require_once("model/ManejoObjetos.php");
 
-			$ManejoObjetos = new ManejoObjetos($conexion);
+				try {
 
-			// Creamos una variable/objeto en donde almacenamos nuestra array con todas las entradas de blog
-			$tabla_blog = $ManejoObjetos->getContenidoPorFechas();
+					$conexion = new PDO('mysql:host=localhost; dbname=ddbb_blog', 'root', '');
+					$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-			if(empty($tabla_blog)){
+					$ManejoObjetos = new ManejoObjetos($conexion);
 
-				echo "No hay entradas de blog";
-			
-			}else{
-				// Recorremos el array y extraemos cada valor de cada elemento
-				foreach($tabla_blog as $elemento){
+					// Creamos una variable/objeto en donde almacenamos nuestra array con todas las entradas de blog
+					$tabla_blog = $ManejoObjetos->getContenidoPorFechas();
 
-					echo "<h2>" . $elemento->getTitulo() . "</h2>";
-					echo "<h4>" . $elemento->getFecha() . "</h4>";
-					echo "<div style='width:400px'>";
-					echo $elemento->getComentario() . "</div>";
+					// if(empty($tabla_blog)){
+					
+					// 	echo "No hay entradas de blog";
+					
+					// }else{
 
-					if($elemento->getImagen() != ""){
-						echo "<img src='Assets/images/";
-						echo $elemento->getImagen() . "' width='300px' height='200px'/>";
-					}
+					// 	// Recorremos el array y extraemos cada valor de cada elemento
+					// 	foreach($tabla_blog as $elemento){
 
-					echo "<hr/>";
+					// 		echo "<h2>" . $elemento->getTitulo() . "</h2>";
+					// 		echo "<h4>" . $elemento->getFecha() . "</h4>";
+					// 		echo "<div style='width:400px'>";
+					// 		echo $elemento->getComentario() . "</div>";
+
+					// 		if($elemento->getImagen() != ""){
+					// 			echo "<img src='Assets/images/";
+					// 			echo $elemento->getImagen() . "' width='300px' height='200px'/>";
+					// 		}
+
+					// 		echo "<hr/>";
+					// 	}
+						
+					// }
+					
+					if(empty($tabla_blog)): 
+
+						echo "<h2>No hay entradas de blog</h2>";
+					
+					else: ?>
+									
+						<?php foreach($tabla_blog as $elemento): ?>
+							
+									<div class="blog">
+										<h2 class="blog__title"><?=$elemento->getTitulo()?></h2>
+										<p class="blog__date"><i><?=$elemento->getFecha()?></i></p>
+										<div class="blog__comment">
+											<?=$elemento->getComentario()?>
+										</div>
+
+								<?php if($elemento->getImagen() != ""): ?>
+
+										<img src='Assets/images/<?= $elemento->getImagen() ?>' />
+
+								<?php endif; ?>
+
+								</div> <!-- End class blog -->
+						
+						<?php endforeach;
+
+					endif;
+					
+				} catch (Exception $e) {
+
+					die("Error: " . $e->getMessage());			
 				}
-			}
 
+			?>
 			
-		} catch (Exception $e) {
-
-			die("Error: " . $e->getMessage());			
-		}
-
-	?>
-
-	<br>
-	<form action="<?php echo $_SERVER['PHP_SELF'];?>" method="post">
-		<a href="#"><input type='submit' name='go_form' id='' value='Volver al formulario de carga'></a>
-	</form>
+		</section><!-- End Section blogs -->
+	</div><!-- End Main -->
 </body>
 </html>
