@@ -21,10 +21,11 @@
 			<?php
 
 				require_once("model/ManejoObjetos.php");
+				require_once("model/config.php");
 
 				try {
 
-					$conexion = new PDO('mysql:host=localhost; dbname=ddbb_blog', 'root', '');
+					$conexion = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NOMBRE."; charset=".DB_CHARSET."", DB_USUARIO, DB_CONTRA);
 					$conexion->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
 					$ManejoObjetos = new ManejoObjetos($conexion);

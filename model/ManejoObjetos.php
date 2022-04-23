@@ -19,7 +19,7 @@
 		public function getContenidoPorFechas(){
 			
 			$matriz = array();
-			$resultado = $this->conexion->query("SELECT * FROM contenido ORDER BY Fecha");
+			$resultado = $this->conexion->query("SELECT * FROM contenido ORDER BY Fecha DESC");
 
 			while ($registro=$resultado->fetch(PDO::FETCH_ASSOC)) {
 				
