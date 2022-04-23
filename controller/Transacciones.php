@@ -9,9 +9,9 @@
 
 	<?php
 
-		require_once("../model/ObjetoBlog.php");
-		require_once("../model/ManejoObjetos.php");
-		require_once("../model/config.php");
+		require_once("model/ObjetoBlog.php");
+		require_once("model/ManejoObjetos.php");
+		require_once("model/config.php");
 
 		try {
 
@@ -24,36 +24,40 @@
 
 				switch ($_FILES['imagen']['error']){
 					case 1: // 	Error por exceso de tamaño en archivo php.ini
-						echo "El tama&ntilde;o del archivo excede lo permitido por el servidor";
+						echo "<p>El tama&ntilde;o del archivo excede lo permitido por el servidor</p>";
 						break;
 					case 2: // 	Error tamaño de archivo marcado en el formulario
-						echo "El tama&ntilde;o del archivo excede 2M";
+						echo "<p>El tama&ntilde;o del archivo excede 2M</p>";
 						break;
 					case 3: // 	Error en el envio del archivo
-						echo "El env&iacute;o del archivo se interrumpi&oacute; y no fu&eacute; subido";
+						echo "<p>El env&iacute;o del archivo se interrumpi&oacute; y no fu&eacute; subido</p>";
 						break;
 					case 4: // 	No hay archivo
-						echo "El se ha enviado ning&uacute;n archivo";
+						echo "<p>El se ha enviado ning&uacute;n archivo</p>";
 						break;
 				}
+
+				require_once("view/Formulario.php");
+
 			}else{
 
-				echo "<br><br>No hay error en la transferencia del archivo.<br/>";
+				echo "<br><br><p>No hay error en la transferencia del archivo.</p><br/>";
 
 				if ((isset($_FILES['imagen']['name']) && ($_FILES['imagen']['error'] == UPLOAD_ERR_OK))) {
 					
-					$destino_de_ruta = "../Assets/images/";
+					$destino_de_ruta = "Assets/images/";
 					$nombre_temporal = $_FILES['imagen']['tmp_name'];
 					$nombre_final = $_FILES['imagen']['name'];
 
 					// Movemos el archivo a la carpeta final
 					move_uploaded_file($nombre_temporal, $destino_de_ruta . $nombre_final);
 
-					echo "El archivo " . $nombre_final . " se ha copiado en el directorio de im&aacute;genes.<br>";
+					echo "<p>El archivo <i>" . $nombre_final . "</i> se ha copiado en el directorio de im&aacute;genes.</p><br>";
 				
 				}else{
-					echo "El archivo no se ha podido copiar en el directorio de im&aacute;genes.";
+					echo "<p>El archivo no se ha podido copiar en el directorio de im&aacute;genes.</p>";
 				}
+
 			}
 
 			// Creamos nuestro objeto que tiene la conexion
@@ -66,18 +70,6 @@
 			// Rescatamos los valores del formulario y los almacenamos en nuestro objeto $blog
 			
 			date_default_timezone_set('America/Argentina/Buenos_Aires'); // Seteamos la hora
-			
-			/*
-			$el_titulo = $_POST['campo_titulo'];
-			$la_fecha = date("Y-m-d H:i:s");
-			$el_comentario = $_POST['area_comentarios'];
-			$la_imagen = $nombre_final;
-
-			$blog->setTitulo($el_titulo);
-			$blog->setFecha($la_fecha);
-			$blog->setComenrario($el_comentario);
-			$blog->setImagen($la_imagen);
-			*/
 
 			// Ver si conviene reemplazar "htmlentities" por "htmlspecialchars"
 			$blog->setTitulo(htmlentities(addslashes($_POST['campo_titulo']), ENT_QUOTES));
@@ -88,7 +80,9 @@
 			// Ahora insertamos en la bbdd nuestra entrada
 			$ManejoObjetos->insertaContenido($blog);
 
-			echo "Entrada de blog agregada con &eacute;xito<br>";
+			echo "<p><strong>Entrada de blog agregada con &eacute;xito.</strong></p><br><br>";
+
+			require_once("view/Formulario.php");
 
 		} catch (Exception $e) {
 			

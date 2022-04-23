@@ -33,30 +33,6 @@
 					// Creamos una variable/objeto en donde almacenamos nuestra array con todas las entradas de blog
 					$tabla_blog = $ManejoObjetos->getContenidoPorFechas();
 
-					// if(empty($tabla_blog)){
-					
-					// 	echo "No hay entradas de blog";
-					
-					// }else{
-
-					// 	// Recorremos el array y extraemos cada valor de cada elemento
-					// 	foreach($tabla_blog as $elemento){
-
-					// 		echo "<h2>" . $elemento->getTitulo() . "</h2>";
-					// 		echo "<h4>" . $elemento->getFecha() . "</h4>";
-					// 		echo "<div style='width:400px'>";
-					// 		echo $elemento->getComentario() . "</div>";
-
-					// 		if($elemento->getImagen() != ""){
-					// 			echo "<img src='Assets/images/";
-					// 			echo $elemento->getImagen() . "' width='300px' height='200px'/>";
-					// 		}
-
-					// 		echo "<hr/>";
-					// 	}
-						
-					// }
-					
 					if(empty($tabla_blog)): 
 
 						echo "<h2>No hay entradas de blog</h2>";

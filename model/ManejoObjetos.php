@@ -42,11 +42,6 @@
 
 			$sql = "INSERT INTO contenido (Titulo, Fecha, Comentario, Imagen) VALUES ('" . $blog->getTitulo() . "','" . $blog->getFecha() . "','" . $blog->getComentario() . "','" . $blog->getImagen() . "')";
 
-			// ('${$blog->getTitulo()}', '${$blog->getFecha()}', '${$blog->getComentario()}', '${$blog->getImagen()}');
-
-			// Revisar si se puede usar la funcion NOW()
-			// $sql = "INSERT INTO contenido (Titulo, Fecha, Comentario, Imagen) VALUES ('$el_titulo', NOW(), '$el_comentario', '$la_imagen')";
-
 			$this->conexion->exec($sql);
 		}
 

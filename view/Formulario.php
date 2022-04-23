@@ -12,7 +12,7 @@
   <div class="main">
     <section class="formulario">
       <h2 class="formulario__title">Nueva entrada</h2>
-      <form action="controller/transacciones.php" method="post" enctype="multipart/form-data" name="form1">
+      <form action="index.php" method="post" enctype="multipart/form-data" name="form1">
         <table>
           <tr>
             <td>
